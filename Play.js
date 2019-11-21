@@ -21,7 +21,9 @@ export default class PlayScreen extends React.Component {
     this.state = {
       timer: 3,
       gameBoxRendered: false,
-      words: []
+      words: [],
+      activeWords: [],
+      test: true
     }
   }
 
@@ -89,12 +91,17 @@ export default class PlayScreen extends React.Component {
       })
     }
 
+  generateWords = () => {
+    let randNum = Math.floor(Math.random() * this.state.words.length)
+      return(<Word word={this.state.words[randNum]} changeState={this.changeState}/>)
+  }
+
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
-      console.log('true')
+      // console.log('true')
       return (
                 <View style={playScreenStyles.gameBox}>
-                  <Word words={this.state.words}/>
+                  {this.generateWords()}
                 </View>
                 )
     } else {
@@ -102,7 +109,12 @@ export default class PlayScreen extends React.Component {
     }
   }
 
+  changeState = () => {
+    this.setState({test: !this.state.test})
+  }
+
   render(){
+      // console.log('rendered')
       return (
         <View style={styles.container}>
             { this.timer() }
