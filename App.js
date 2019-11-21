@@ -7,7 +7,14 @@ import PlayScreen from './Play.js'
 // styling
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'column',
+    flex: 6,
+    backgroundColor: '#000000',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }, subContainer: {
+    flex:2,
+    flexDirection:"row",
     backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'center',
@@ -23,6 +30,10 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 75,
+  }, timerText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 250,
   }, button: {
     alignItems: 'center',
     padding: 5,
@@ -36,12 +47,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   }, inputUsername: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    color: '#fff',
     width: '80%',
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: '#FFF',
+    backgroundColor: '#000000',
+    textAlign: 'center',
   }
 });
 

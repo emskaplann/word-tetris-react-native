@@ -11,9 +11,28 @@ export default class TextForUsername extends React.Component {
     }
   }
 
+  randomUsernameGenerator = () => {
+    randomDoubles = ['ll', 'xx', 'oo', 'kk', 'tt', 'ww', 'nn']
+    let initialUsername = 'ba' + randomDoubles[Math.floor(Math.random() * 6)] + 'r' + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10)
+    this.setState({
+      text: initialUsername
+    })
+    this.handleInput(initialUsername)
+  }
+// handling input in every keystroke
   handleInput = (text) => {
-    this.setState({text: text})
-    this.props.handleChange(text)
+    text = text.toLowerCase()
+    if(text.length < 8){
+      this.setState({text: text})
+// sending info to the parent component which is home
+      this.props.handleChange(text)
+    } else {
+      // no need to do anything
+    }
+  }
+
+  componentDidMount(){
+    this.randomUsernameGenerator()
   }
 
   render(){

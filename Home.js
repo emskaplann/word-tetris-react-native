@@ -11,6 +11,7 @@ export default class HomeScreen extends React.Component {
       super();
 
       this.state = {
+        alert: false,
         textValue: ""
       }
     }
@@ -20,8 +21,10 @@ export default class HomeScreen extends React.Component {
 
       if(this.state.textValue !== ""){
         navigate('Play', {name: 'Jane'})
+        this.setState({alert: false})
+        this.changeAlert(false)
       } else {
-
+        this.changeAlert(true)
       }
     }
 
@@ -30,14 +33,43 @@ export default class HomeScreen extends React.Component {
         textValue: text
       })
     }
+// changing alert state based on user movements
+    changeAlert = (bool) => {
+      this.setState({ alert: bool })
+    }
+
+// rendering alert message for blank username field...
+    showAlertMsg = () => {
+      if(this.state.alert === false){
+
+      } else if(this.state.alert === true){
+        return( <Text style={styles.text}>put username.</Text> )
+      }
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+      if(nextState !== this.state){
+        return true
+      } else {
+        return false
+      }
+    }
 
     render(){
       // background image => not looks good!
       // const imgBg = "./images/background-tetris.jpg"
       return (
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.subContainer}>
           <Text style={styles.text}>Word Tetris</Text>
+          <View style={styles.subContainer}>
+            {this.showAlertMsg()}
+          </View>
+        </View>
+        <View style={styles.subContainer}>
           <TextForUsername handleChange={this.getValue}/>
+        </View>
+        <View style={styles.subContainer}>
             <TouchableOpacity
               style={styles.button}
               title="Play!"
@@ -45,8 +77,12 @@ export default class HomeScreen extends React.Component {
             >
               <Text style={styles.text2}>Play!</Text>
             </TouchableOpacity>
-            <Text style={styles.text2}>{this.state.textValue}</Text>
         </View>
+        <View style={styles.container}>
+        </View>
+      </View>
       );
     }
   }
+
+  // <Text style={styles.text2}>{this.state.textValue}</Text>
