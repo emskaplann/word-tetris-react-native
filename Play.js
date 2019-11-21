@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { styles } from './App.js';
+import Word from './Word.js';
 
   const playScreenStyles = {
     text: {
@@ -11,10 +12,8 @@ import { styles } from './App.js';
       backgroundColor: '#fff',
       height: '50%',
       width: '100%',
-    }
+    },
   }
-
-  const words = []
 
 export default class PlayScreen extends React.Component {
   constructor(){
@@ -64,37 +63,12 @@ export default class PlayScreen extends React.Component {
     }
   }
 
-// fetching words from NEWS API...
-  fetchWords = () => {
-    let url = 'https://newsapi.org/v2/top-headlines?' +
-          'country=us&' +
-          'apiKey=277ca875809f4f6484e5d830b2158bef'
-    fetch(url)
-    .then(r => r.json())
-    .then(response => {
-      response.articles.forEach(article => {
-      if (article.description != null) {
-          article.description.split(" ").forEach(word => {
-              word = word.replace(/[^a-zA-Z0-9 -]/g,"")
-              if( word == "" || word == " " || word == "--" ){
-
-              } else {
-                words.push(word.toLowerCase())
-              }
-              // fetch works properly
-         })
-        }
-      })
-    })
-  }
-
-
-
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
       console.log('true')
       return (
                 <View style={playScreenStyles.gameBox}>
+                  <Word />
                 </View>
                 )
     } else {
@@ -109,7 +83,6 @@ export default class PlayScreen extends React.Component {
         <View style={styles.container}>
             { this.timer() }
             { this.renderGameBox() }
-            { this.fetchWords() }
         </View>
       );
     }
