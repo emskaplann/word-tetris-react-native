@@ -20,12 +20,14 @@ export default class PlayScreen extends React.Component {
     super();
     this.state = {
       timer: 3,
-      gameBoxRendered: false
+      gameBoxRendered: false,
+      words: []
     }
   }
 
 
   componentDidMount(){
+    this.fetchWords()
     this.interval = setInterval(this.decreaseTimer, 1000)
   }
 
@@ -63,12 +65,36 @@ export default class PlayScreen extends React.Component {
     }
   }
 
+  // fetching words from NEWS API...
+    fetchWords = () => {
+      let url = 'https://newsapi.org/v2/top-headlines?' +
+            'country=us&' +
+            'apiKey=277ca875809f4f6484e5d830b2158bef'
+      fetch(url)
+      .then(r => r.json())
+      .then(response => {
+        response.articles.forEach(article => {
+        if (article.description != null) {
+            article.description.split(" ").forEach(word => {
+                word = word.replace(/[^a-zA-Z0-9 -]/g,"")
+                if( word == "" || word == " " || word == "--" ){
+
+                } else {
+                  this.setState({words: [...this.state.words, word]})
+                }
+                // fetch works properly
+           })
+          }
+        })
+      })
+    }
+
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
       console.log('true')
       return (
                 <View style={playScreenStyles.gameBox}>
-                  <Word />
+                  <Word words={this.state.words}/>
                 </View>
                 )
     } else {
