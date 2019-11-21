@@ -85,15 +85,22 @@ export default class PlayScreen extends React.Component {
                   this.setState({words: [...this.state.words, word]})
                 }
                 // fetch works properly
-           })
-          }
+             })
+            }
+          })
+          this.interval2 = setInterval(this.addToActWords, 500)
         })
-      })
-    }
+      }
+
+  addToActWords = () => {
+    let randNum = Math.floor(Math.random() * this.state.words.length)
+    this.setState({ activeWords: [...this.state.activeWords, this.state.words[randNum]]})
+    // console.log(this.state)
+  }
 
   generateWords = () => {
     let randNum = Math.floor(Math.random() * this.state.words.length)
-      return(<Word word={this.state.words[randNum]} changeState={this.changeState}/>)
+    return(<Word word={this.state.words[randNum]} changeState={this.changeState}/>)
   }
 
   renderGameBox = () => {
