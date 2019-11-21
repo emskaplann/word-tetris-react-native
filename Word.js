@@ -7,7 +7,6 @@ const style = {
     color: '#000000',
     fontWeight: 'bold',
     position: 'absolute',
-    positionLeft: 100,
   }
 }
 
@@ -16,16 +15,31 @@ export default class Word extends React.Component {
     super();
 
     this.state = {
+      positionTop: 0,
+      positionLeft: Math.floor(Math.random() * 325)
     }
   }
 
   componentDidMount(){
+    this.interval = setInterval(this.slideWord, 10)
   }
 
-
+  slideWord = () => {
+    this.setState({
+      positionTop: this.state.positionTop + 0.5
+    })
+  }
 
     renderWord = () => {
-      return(<Text style={style.slidingWords}>-- {this.props.words[1]} --</Text>)
+      const style2 = {
+        color: '#000000',
+        fontSize: 30,
+        fontWeight: 'bold',
+        position: 'absolute',
+        top: this.state.positionTop,
+        left: this.state.positionLeft
+      }
+      return(<Text style={style2}>{this.props.words[1]}</Text>)
     }
 
     render(){

@@ -98,8 +98,6 @@ export default class PlayScreen extends React.Component {
                 </View>
                 )
     } else {
-      // just for test purposes :)
-      console.log('true2')
       return(<Text style={playScreenStyles.text}>Something went wrong :/</Text>)
     }
   }
