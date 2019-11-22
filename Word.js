@@ -25,7 +25,6 @@ export default class Word extends React.Component {
   }
 
   slideWord = () => {
-    this.props.changeState()
     this.setState({
       positionTop: this.state.positionTop + 0.5
     })
@@ -40,10 +39,11 @@ export default class Word extends React.Component {
         top: this.state.positionTop,
         left: this.state.positionLeft
       }
-      return(<Text style={style2}>{this.props.word}</Text>)
+      return(<Text style={style2}>{this.props.text}</Text>)
     }
 
     render(){
+      // console.log(this.props)
       return(this.renderWord())
     }
 }

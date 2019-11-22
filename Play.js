@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { styles } from './App.js';
-import Word from './Word.js';
+import MultipleWords from './MultipleWords.js';
 
   const playScreenStyles = {
     text: {
@@ -22,8 +22,6 @@ export default class PlayScreen extends React.Component {
       timer: 3,
       gameBoxRendered: false,
       words: [],
-      activeWords: [],
-      test: true
     }
   }
 
@@ -88,36 +86,22 @@ export default class PlayScreen extends React.Component {
              })
             }
           })
-          this.interval2 = setInterval(this.addToActWords, 500)
         })
       }
 
-  addToActWords = () => {
-    let randNum = Math.floor(Math.random() * this.state.words.length)
-    this.setState({ activeWords: [...this.state.activeWords, this.state.words[randNum]]})
-    // console.log(this.state)
-  }
-
-  generateWords = () => {
-    let randNum = Math.floor(Math.random() * this.state.words.length)
-    return(<Word word={this.state.words[randNum]} changeState={this.changeState}/>)
-  }
+    
 
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
       // console.log('true')
       return (
                 <View style={playScreenStyles.gameBox}>
-                  {this.generateWords()}
+                  <MultipleWords words={this.state.words}/>
                 </View>
                 )
     } else {
       return(<Text style={playScreenStyles.text}>Something went wrong :/</Text>)
     }
-  }
-
-  changeState = () => {
-    this.setState({test: !this.state.test})
   }
 
   render(){
