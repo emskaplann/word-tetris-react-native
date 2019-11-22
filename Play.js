@@ -15,16 +15,22 @@ import MultipleWords from './MultipleWords.js';
     }, input: {
       position: 'absolute',
       top: 400,
+      width: '92%',
+      height: 30,
       fontSize: 25,
       fontWeight: 'bold',
       color: '#000000',
-      width: '100%',
-      height: 30,
       borderWidth: 1,
       borderColor: '#000000',
       borderRadius: 4,
       backgroundColor: '#fff',
-      textAlign: 'center',
+      textAlign: 'left',
+    }, sendButton: {
+      position: 'absolute',
+      top: 399,
+      right: 0,
+      width: '8%',
+      backgroundColor: '#000000',
     }
   }
 
@@ -92,7 +98,7 @@ export default class PlayScreen extends React.Component {
                 if( word == "" || word == " " || word == "--" ){
 
                 } else {
-                  this.setState({words: [...this.state.words, word]})
+                  this.setState({words: [...this.state.words, word.toLowerCase()]})
                 }
                 // fetch works properly
              })

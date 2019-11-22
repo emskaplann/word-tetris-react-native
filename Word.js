@@ -25,7 +25,7 @@ export default class Word extends React.Component {
   }
 
   componentWillUnmount(){
-    console.log('willunmount')
+    // console.log('willunmount')
     clearInterval(this.interval)
   }
 
