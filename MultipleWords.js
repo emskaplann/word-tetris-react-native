@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import Word from './Word.js'
+import { playScreenStyles } from './Play.js'
 
 export default class MultipleWords extends React.Component {
   constructor(){
@@ -8,7 +9,8 @@ export default class MultipleWords extends React.Component {
 
     this.state = {
       activeWords: ["test"],
-      id: 1
+      id: 1,
+      input: "",
     }
   }
 
@@ -21,28 +23,46 @@ export default class MultipleWords extends React.Component {
     this.setState({
       activeWords: [...this.state.activeWords, this.props.words[randNum]]
     }, function(){
-      this.handleLatestComp()
     })
   }
 
-  handleLatestComp = () => {
-    // let positions = React.Children.map(this.children, x => {
-    //   return (x)
-    // })
-    // console.log(this.props)
+  handleInput = (text) => {
+    this.setState({input: text})
+    if(this.state.activeWords.includes(text.toLowerCase())){
+      let fakeArr = this.state.activeWords
+      let idx = fakeArr.indexOf(text.toLowerCase())
+      if( idx !== -1){
+        fakeArr.splice(idx, 1)
+      }
+      this.setState({activeWords: fakeArr})
+      this.setState({input: ""})
+    } else{
+      console.log('bilemedin aq cocu')
+    }
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.interval)
+  }
+
+  renderTextInput = () => {
+      return(<TextInput
+        style={playScreenStyles.input}
+        onChangeText={(text) => this.handleInput(text)}
+        value={this.state.input}
+      />)
   }
 
   renderWords = () => {
-    // console.log(this.state)
-    const transformedArray = this.state.activeWords.map((word) =>
-    <Word text={word} handleEndGame={this.props.handleEndGame} positionTop={0}/>)
-    // this.props.children = transformedArray
-    console.log(transformedArray[1])
+    const transformedArray = this.state.activeWords.map((word, idx) =>
+    <Word text={word} key={idx} handleEndGame={this.props.handleEndGame} positionTop={0}/>)
     return transformedArray;
   }
 
   render(){
-    // console.log(this.state.activeWords)
-    return(this.renderWords())
+    return(<View>
+            { this.renderWords() }
+            { this.renderTextInput() }
+          </View>)
   }
 }

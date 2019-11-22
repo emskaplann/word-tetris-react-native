@@ -24,6 +24,10 @@ export default class Word extends React.Component {
     this.interval = setInterval(this.slideWord, 10)
   }
 
+  componentWillUnmount(){
+    clearInterval(this.interval)
+  }
+  
   slideWord = () => {
     this.setState({
       positionTop: this.state.positionTop + 0.5

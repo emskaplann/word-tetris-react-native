@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { styles } from './App.js';
 import MultipleWords from './MultipleWords.js';
 
-  const playScreenStyles = {
+  export const playScreenStyles = {
     text: {
       color: '#fff'
     }, gameBox: {
@@ -17,7 +17,7 @@ import MultipleWords from './MultipleWords.js';
       top: 400,
       fontSize: 25,
       fontWeight: 'bold',
-      color: '#fff',
+      color: '#000000',
       width: '100%',
       height: 30,
       borderWidth: 1,
@@ -35,10 +35,8 @@ export default class PlayScreen extends React.Component {
       timer: 3,
       gameBoxRendered: false,
       words: [],
-      latestChild: "",
     }
   }
-
 
   componentDidMount(){
     this.fetchWords()
@@ -110,34 +108,16 @@ export default class PlayScreen extends React.Component {
     console.log('game has been ended')
   }
 
-  handleInput = () => {
-
-  }
-
-  takeLatestComp = (comp) => {
-
-  }
-
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
-      // console.log('true')
+      console.log()
       return (
                 <View style={playScreenStyles.gameBox}>
-                  <MultipleWords words={this.state.words} handleEndGame={this.handleEndGame} sendLatestComp={this.takeLatestComp} children={[]}/>
+                  <MultipleWords words={this.state.words} handleEndGame={this.handleEndGame}/>
                 </View>
                 )
     } else {
       return(<Text style={playScreenStyles.text}>Something went wrong :/</Text>)
-    }
-  }
-
-  renderTextInput = () => {
-    if(this.state.timer === 'finished'){
-      return(<TextInput
-        style={playScreenStyles.input}
-        onChangeText={(input) => this.handleInput(input)}
-        value={this.state.input}
-      />)
     }
   }
 
@@ -147,7 +127,6 @@ export default class PlayScreen extends React.Component {
         <View style={styles.container}>
             { this.timer() }
             { this.renderGameBox() }
-            { this.renderTextInput() }
         </View>
       );
     }
