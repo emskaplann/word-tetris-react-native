@@ -9,7 +9,6 @@ export default class MultipleWords extends React.Component {
 
     this.state = {
       activeWords: ["test"],
-      id: 1,
       input: "",
     }
   }
@@ -22,27 +21,26 @@ export default class MultipleWords extends React.Component {
     let randNum = Math.floor(Math.random() * this.props.words.length)
     this.setState({
       activeWords: [...this.state.activeWords, this.props.words[randNum]]
-    }, function(){
     })
   }
 
   handleInput = (text) => {
     this.setState({input: text})
     if(this.state.activeWords.includes(text.toLowerCase())){
-      let fakeArr = this.state.activeWords
-      let idx = fakeArr.indexOf(text.toLowerCase())
-      if( idx !== -1){
-        fakeArr.splice(idx, 1)
-      }
-      this.setState({activeWords: fakeArr})
-      this.setState({input: ""})
+      let fakeArr = this.state.activeWords.filter(word => word !== text.toLowerCase())
+      // console.log(fakeArr)
+      this.setState({activeWords: fakeArr, input: ""})
     } else{
-      console.log('bilemedin aq cocu')
+      // console.log('bilemedin aq cocu')
     }
   }
 
   componentWillUnmount(){
     clearInterval(this.interval)
+  }
+
+  componentWillUpdate(nextProps, nextState){
+
   }
 
   renderTextInput = () => {
@@ -55,7 +53,8 @@ export default class MultipleWords extends React.Component {
 
   renderWords = () => {
     const transformedArray = this.state.activeWords.map((word, idx) =>
-    <Word text={word} key={idx} handleEndGame={this.props.handleEndGame} positionTop={0}/>)
+    <Word text={word} key={word} handleEndGame={this.props.handleEndGame} />)
+    // console.log(transformedArray[0])
     return transformedArray;
   }
 
