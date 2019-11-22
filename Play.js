@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { styles } from './App.js';
 import MultipleWords from './MultipleWords.js';
 
@@ -12,7 +12,20 @@ import MultipleWords from './MultipleWords.js';
       backgroundColor: '#fff',
       height: '50%',
       width: '100%',
-    },
+    }, input: {
+      position: 'absolute',
+      top: 400,
+      fontSize: 25,
+      fontWeight: 'bold',
+      color: '#fff',
+      width: '100%',
+      height: 30,
+      borderWidth: 1,
+      borderColor: '#000000',
+      borderRadius: 4,
+      backgroundColor: '#fff',
+      textAlign: 'center',
+    }
   }
 
 export default class PlayScreen extends React.Component {
@@ -22,6 +35,7 @@ export default class PlayScreen extends React.Component {
       timer: 3,
       gameBoxRendered: false,
       words: [],
+      latestChild: "",
     }
   }
 
@@ -86,21 +100,44 @@ export default class PlayScreen extends React.Component {
              })
             }
           })
+          this.setState({words: [...new Set(this.state.words)]})
         })
       }
 
-    
+// what happens when the game ends
+// does it work? yes
+  handleEndGame = () => {
+    console.log('game has been ended')
+  }
+
+  handleInput = () => {
+
+  }
+
+  takeLatestComp = (comp) => {
+
+  }
 
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
       // console.log('true')
       return (
                 <View style={playScreenStyles.gameBox}>
-                  <MultipleWords words={this.state.words}/>
+                  <MultipleWords words={this.state.words} handleEndGame={this.handleEndGame} sendLatestComp={this.takeLatestComp} children={[]}/>
                 </View>
                 )
     } else {
       return(<Text style={playScreenStyles.text}>Something went wrong :/</Text>)
+    }
+  }
+
+  renderTextInput = () => {
+    if(this.state.timer === 'finished'){
+      return(<TextInput
+        style={playScreenStyles.input}
+        onChangeText={(input) => this.handleInput(input)}
+        value={this.state.input}
+      />)
     }
   }
 
@@ -110,6 +147,7 @@ export default class PlayScreen extends React.Component {
         <View style={styles.container}>
             { this.timer() }
             { this.renderGameBox() }
+            { this.renderTextInput() }
         </View>
       );
     }

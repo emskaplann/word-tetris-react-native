@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { styles } from './App.js';
-
+// bottom for gameBox is top: 390
 const style = {
   slidingWords: {
     color: '#000000',
@@ -27,6 +27,10 @@ export default class Word extends React.Component {
   slideWord = () => {
     this.setState({
       positionTop: this.state.positionTop + 0.5
+    }, function(){
+      if(this.state.positionTop === 390){
+        this.props.handleEndGame()
+      };
     })
   }
 
