@@ -70,9 +70,8 @@ export default class MultipleWords extends React.Component {
   }
 
   renderWords = () => {
-    const transformedArray = this.state.activeWords.map((word, idx) =>
+    const transformedArray = this.state.activeWords.map((word) =>
     <Word text={word} key={word} handleEndGame={this.props.handleEndGame} />)
-    // console.log(transformedArray[0])
     return transformedArray;
   }
 

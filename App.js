@@ -4,6 +4,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from './Home.js'
 import PlayScreen from './Play.js'
+import HighScoreScreen from './HighScoreScreen.js'
 // styling
 export const styles = StyleSheet.create({
   container: {
@@ -61,6 +62,7 @@ export const styles = StyleSheet.create({
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
   Play: {screen: PlayScreen},
+  HighScores: {screen: HighScoreScreen}
 });
 
 

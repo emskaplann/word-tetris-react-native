@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import { styles } from './App.js';
 import MultipleWords from './MultipleWords.js';
 
@@ -112,11 +112,12 @@ export default class PlayScreen extends React.Component {
 // does it work? yes
   handleEndGame = () => {
     console.log('game has been ended')
+    // when game ends renders highscores
+    this.props.navigation.replace(('HighScores': {name: 'asd'}));
   }
 
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
-      console.log()
       return (
                 <View style={playScreenStyles.gameBox}>
                   <MultipleWords words={this.state.words} handleEndGame={this.handleEndGame}/>
