@@ -28,13 +28,6 @@ export default class MultipleWords extends React.Component {
   handleInput = (text2) => {
     text = text2.toLowerCase()
     this.setState({input: text})
-    // if(this.state.activeWords.includes(text.toLowerCase())){
-    //   let fakeArr = this.state.activeWords.filter(word => word !== text)
-    //   // console.log(fakeArr)
-    //   this.setState({activeWords: fakeArr, input: ""})
-    // } else{
-    //   // console.log('bilemedin aq cocu')
-    // }
   }
 
   componentWillUnmount(){

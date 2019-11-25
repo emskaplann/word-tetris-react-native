@@ -132,6 +132,7 @@ export default class PlayScreen extends React.Component {
       // console.log('rendered')
       return (
         <View style={styles.container}>
+            { this.handleEndGame() }
             { this.timer() }
             { this.renderGameBox() }
         </View>
