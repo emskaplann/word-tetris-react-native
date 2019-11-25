@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, ScrollView, Button} from 'react-native';
+import HSModal from './HighScoreModal.js';
 import { styles } from './App.js';
 
 
@@ -79,6 +80,7 @@ export default class HighScoreScreen extends React.Component {
 
   render(){
     return(<View style={styles.container}>
+            <HSModal />
             <Text style={{
                 position: "absolute",
                 top: 0,
