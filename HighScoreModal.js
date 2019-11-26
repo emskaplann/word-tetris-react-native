@@ -26,6 +26,11 @@ export default class HSModal extends React.Component {
                 <Text style={{color: "#fff", fontWeight: 'bold', fontSize: 30, alignSelf: 'flex-end',}}>x</Text>
               </TouchableHighlight>
               <Text style={{color: "#fff", fontWeight: 'bold', fontSize: 50, position: 'absolute', top: 10, paddingLeft: 5}}>your stats</Text>
+              <Text style={{color: "#fff", fontWeight: '700', fontSize: 40, paddingLeft: 10, paddingTop: 30}}>{this.props.userName}</Text>
+              <Text style={{color: "#fff", fontWeight: '700', fontSize: 30, paddingLeft: 15}}>time: {this.props.time}</Text>
+              <Text style={{color: "#fff", fontWeight: '700', fontSize: 30, paddingLeft: 15}}>score: {this.props.score}</Text>
+
+
           </View>
         </Modal>
       </View>

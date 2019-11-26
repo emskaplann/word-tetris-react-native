@@ -112,15 +112,7 @@ export default class PlayScreen extends React.Component {
         })
       }
 
-// what happens when the game ends
-// does it work? yes
-  handleEndGame = () => {
-    console.log('game has been ended')
-    // when game ends renders highscores
-  }
-
   postFetchUser = () => {
-    console.log(this.props.navigation.getParam('userName', 'uName'))
     fetch("https://calm-ocean-20734.herokuapp.com/users", {
       method: "POST",
       headers: {
@@ -139,7 +131,6 @@ export default class PlayScreen extends React.Component {
   }
 
   postFetchGame = () => {
-    console.log(this.state)
     fetch("https://calm-ocean-20734.herokuapp.com/games", {
       method: "POST",
       headers: {
@@ -153,18 +144,16 @@ export default class PlayScreen extends React.Component {
     })
     .then(r => r.json())
     .then(r => {
-      // console.log(r)
-      this.props.navigation.replace(('HighScores': {game: {
-        asd: "asd"
-        // time: r.time,
-        // score: r.score,
-        // userName: r.user.username
+      this.props.navigation.replace(({routeName: 'HighScores', params: {
+        time: r.time,
+        score: r.score,
+        userName: r.user.username
       }}));
     })
   }
 
+// game ends in this function => called back in child
   takeGameInfo = (time, score) => {
-    console.log(time, score)
     this.setState({
       userTime: time,
       userScore: score,
@@ -184,7 +173,6 @@ export default class PlayScreen extends React.Component {
   }
 
   render(){
-      // console.log('rendered')
       return (
         <View style={styles.container}>
 

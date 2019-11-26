@@ -79,8 +79,10 @@ export default class HighScoreScreen extends React.Component {
   }
 
   render(){
+    const navigation = this.props.navigation
     return(<View style={styles.container}>
-            <HSModal />
+
+            <HSModal userName={navigation.getParam('userName', 'noName')} time={navigation.getParam('time', 'noTime')} score={navigation.getParam('score', 'noScore')} />
             <Text style={{
                 position: "absolute",
                 top: 0,

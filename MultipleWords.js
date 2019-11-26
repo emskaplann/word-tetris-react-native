@@ -40,7 +40,6 @@ export default class MultipleWords extends React.Component {
   }
 
   componentWillUnmount(){
-    console.log('unmount')
     clearInterval(this.interval)
     clearInterval(this.interval2)
   }
@@ -50,15 +49,13 @@ export default class MultipleWords extends React.Component {
   }
 
   handleSubmit(){
-    // console.log("in handleSubmit")
     let text = this.state.input
-    // console.log(text)
     if(this.state.activeWords.includes(text)){
         let fakeArr = this.state.activeWords.filter(word => word !== text)
         this.setState({activeWords: fakeArr, input: "", score: this.state.score + text.length})
     } else {
-      // do reject react!
-      console.log('nope')
+      // do reject animation!
+      console.log('add animation')
     }
   }
 
