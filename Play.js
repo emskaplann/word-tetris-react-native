@@ -60,7 +60,7 @@ export default class PlayScreen extends React.Component {
     if(this.state !== nextState || this.state.timer === 'finished'){
       return true
     }
-    return false
+    return falser
   }
 
   componentWillUnmount(){
@@ -167,7 +167,7 @@ export default class PlayScreen extends React.Component {
     if(this.state.timer === 'finished'){
       return (
                 <View style={playScreenStyles.gameBox}>
-                  <MultipleWords words={this.state.words} handleEndGame={this.handleEndGame} sendGameInfo={this.takeGameInfo}/>
+                  <MultipleWords words={this.state.words} difficulty={this.state.diff} handleEndGame={this.handleEndGame} sendGameInfo={this.takeGameInfo}/>
                 </View>
                 )
     } else {

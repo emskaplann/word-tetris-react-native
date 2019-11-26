@@ -17,7 +17,13 @@ export default class MultipleWords extends React.Component {
   }
 
   componentDidMount(){
-    this.interval = setInterval(this.addToActWords, 3000)
+    let wordsRainRate = 2000
+    if(this.props.difficulty === 0){
+      wordsRainRate = 3000
+    } else if(this.props.difficulty === 2){
+      wordsRainRate = 1000
+    }
+    this.interval = setInterval(this.addToActWords, wordsRainRate)
     this.interval2 = setInterval(this.increaseTime, 1000)
   }
 
