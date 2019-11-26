@@ -66,7 +66,7 @@ export default class MultipleWords extends React.Component {
         onChangeText={(text) => this.handleInput(text)}
         value={this.state.input}
       />
-    <TouchableHighlight style={playScreenStyles.sendButton} onPress={()=> this.handleSubmit()}>
+      <TouchableHighlight style={playScreenStyles.sendButton} onPress={()=> this.handleSubmit()}>
       <View>
         <Icon name="send" color="#fff" size={30}/>
       </View>

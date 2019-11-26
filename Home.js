@@ -61,7 +61,6 @@ export default class HomeScreen extends React.Component {
       return (
       <View style={styles.container}>
         <View style={styles.subContainer}>
-          <Text style={styles.text}>Word Tetris</Text>
           <View style={styles.subContainer}>
             {this.showAlertMsg()}
           </View>

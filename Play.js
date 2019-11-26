@@ -8,7 +8,7 @@ import MultipleWords from './MultipleWords.js';
       color: '#fff'
     }, gameBox: {
       position: 'absolute',
-      top: 15,
+      top: 0,
       backgroundColor: '#fff',
       height: '50%',
       width: '100%',
@@ -22,12 +22,13 @@ import MultipleWords from './MultipleWords.js';
       color: '#000000',
       borderWidth: 1,
       borderColor: '#000000',
-      borderRadius: 4,
+      borderRadius: 0,
       backgroundColor: '#fff',
       textAlign: 'left',
     }, sendButton: {
       position: 'absolute',
-      top: 399,
+      top: 400,
+      borderRadius: 0,
       right: 0,
       width: '8%',
       backgroundColor: '#000000',

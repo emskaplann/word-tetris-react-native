@@ -63,6 +63,20 @@ const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
   Play: {screen: PlayScreen},
   HighScores: {screen: HighScoreScreen}
+}, {
+  initialRouteName: 'Home',
+    /* The header config from HomeScreen is now here */
+    defaultNavigationOptions: {
+      headerTitle: 'Word Tetris!',
+      headerStyle: {
+        backgroundColor: '#000000',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 35,
+      }
+    },
 });
 
 
