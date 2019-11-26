@@ -41,11 +41,15 @@ export default class PlayScreen extends React.Component {
       timer: 3,
       gameBoxRendered: false,
       words: [],
+      userTime: 0,
+      userScore: 0,
+      userId: 0,
     }
   }
 
   componentDidMount(){
     this.fetchWords()
+    this.postFetchUser()
     this.interval = setInterval(this.decreaseTimer, 1000)
   }
 
@@ -113,14 +117,65 @@ export default class PlayScreen extends React.Component {
   handleEndGame = () => {
     console.log('game has been ended')
     // when game ends renders highscores
-    this.props.navigation.replace(('HighScores': {name: 'asd'}));
+  }
+
+  postFetchUser = () => {
+    console.log(this.props.navigation.getParam('userName', 'uName'))
+    fetch("https://calm-ocean-20734.herokuapp.com/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }, body: JSON.stringify({
+          username: this.props.navigation.getParam('userName', 'uName')
+      })
+    })
+    .then(r => r.json())
+    .then(r => {
+      this.setState({
+        userId: r.id
+      })
+    })
+  }
+
+  postFetchGame = () => {
+    console.log(this.state)
+    fetch("https://calm-ocean-20734.herokuapp.com/games", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }, body: JSON.stringify({
+          time: this.state.userTime,
+          score: this.state.userScore,
+          user_id: this.state.userId
+      })
+    })
+    .then(r => r.json())
+    .then(r => {
+      // console.log(r)
+      this.props.navigation.replace(('HighScores': {game: {
+        asd: "asd"
+        // time: r.time,
+        // score: r.score,
+        // userName: r.user.username
+      }}));
+    })
+  }
+
+  takeGameInfo = (time, score) => {
+    console.log(time, score)
+    this.setState({
+      userTime: time,
+      userScore: score,
+    }, this.postFetchGame)
   }
 
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
       return (
                 <View style={playScreenStyles.gameBox}>
-                  <MultipleWords words={this.state.words} handleEndGame={this.handleEndGame}/>
+                  <MultipleWords words={this.state.words} handleEndGame={this.handleEndGame} sendGameInfo={this.takeGameInfo}/>
                 </View>
                 )
     } else {
@@ -132,7 +187,7 @@ export default class PlayScreen extends React.Component {
       // console.log('rendered')
       return (
         <View style={styles.container}>
-            { this.handleEndGame() }
+
             { this.timer() }
             { this.renderGameBox() }
         </View>

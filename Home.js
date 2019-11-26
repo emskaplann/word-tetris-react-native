@@ -20,7 +20,7 @@ export default class HomeScreen extends React.Component {
       const {navigate} = this.props.navigation
 
       if(this.state.textValue !== ""){
-        navigate('Play', {name: 'Jane'})
+        navigate('Play', {userName: this.state.textValue})
         this.setState({alert: false})
         this.changeAlert(false)
       } else {

@@ -11,11 +11,14 @@ export default class MultipleWords extends React.Component {
     this.state = {
       activeWords: ["test"],
       input: "",
+      score: 0,
+      time: 0,
     }
   }
 
   componentDidMount(){
     this.interval = setInterval(this.addToActWords, 3000)
+    this.interval2 = setInterval(this.increaseTime, 1000)
   }
 
   addToActWords = () => {
@@ -25,22 +28,34 @@ export default class MultipleWords extends React.Component {
     })
   }
 
+  increaseTime = () => {
+    this.setState({
+      time: this.state.time + 1
+    })
+  }
+
   handleInput = (text2) => {
     text = text2.toLowerCase()
     this.setState({input: text})
   }
 
   componentWillUnmount(){
+    console.log('unmount')
     clearInterval(this.interval)
+    clearInterval(this.interval2)
+  }
+
+  beforeHandleGame = () => {
+    this.props.sendGameInfo(this.state.time, this.state.score)
   }
 
   handleSubmit(){
-    console.log("in handleSubmit")
+    // console.log("in handleSubmit")
     let text = this.state.input
-    console.log(text)
+    // console.log(text)
     if(this.state.activeWords.includes(text)){
         let fakeArr = this.state.activeWords.filter(word => word !== text)
-        this.setState({activeWords: fakeArr, input: ""})
+        this.setState({activeWords: fakeArr, input: "", score: this.state.score + text.length})
     } else {
       // do reject react!
       console.log('nope')
@@ -64,7 +79,7 @@ export default class MultipleWords extends React.Component {
 
   renderWords = () => {
     const transformedArray = this.state.activeWords.map((word) =>
-    <Word text={word} key={word} handleEndGame={this.props.handleEndGame} />)
+    <Word text={word} key={word} handleEndGame={this.beforeHandleGame} />)
     return transformedArray;
   }
 
