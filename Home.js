@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { styles } from './App.js';
-import TextForUsername from './TextForUsername.js'
+import TextForUsername from './TextForUsername.js';
+import { ButtonGroup } from 'react-native-elements';
+
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -12,8 +14,15 @@ export default class HomeScreen extends React.Component {
 
       this.state = {
         alert: false,
-        textValue: ""
+        textValue: "",
+        selectedDiff: 1,
       }
+    }
+
+    changeSelectedDiff = (newDif) => {
+      this.setState({
+        selectedDiff: newDif
+      })
     }
 
     handleSubmit = () => {
@@ -56,15 +65,13 @@ export default class HomeScreen extends React.Component {
     }
 
     render(){
-      // background image => not looks good!
-      // const imgBg = "./images/background-tetris.jpg"
+      const buttons = ['easy', 'medium', 'hard']
+      const { newDiff } = this.state.selectedDiff
       return (
       <View style={styles.container}>
-        <View style={styles.subContainer}>
           <View style={styles.subContainer}>
             {this.showAlertMsg()}
           </View>
-        </View>
         <View style={styles.subContainer}>
           <TextForUsername handleChange={this.getValue}/>
         </View>
@@ -74,8 +81,19 @@ export default class HomeScreen extends React.Component {
               title="Play!"
               onPress={this.handleSubmit}
             >
-              <Text style={styles.text2}>Play!</Text>
+              <Text style={styles.text2}>play {buttons[this.state.selectedDiff]}</Text>
             </TouchableOpacity>
+        </View>
+        <View style={styles.subContainer}>
+          <ButtonGroup
+              onPress={this.changeSelectedDiff}
+              selectedIndex={newDiff}
+              buttons={buttons}
+              containerStyle={{height: 25, width: '55%', backgroundColor: "#000000"}}
+              textStyle={{color: "#fff", fontWeight: 'bold'}}
+              containerBorderRadius={2}
+              innerBorderStyle={{width: 1, color: "#fff"}}
+            />
         </View>
         <View style={styles.container}>
         </View>

@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   }, subContainer: {
-    flex:2,
+    flex:1,
     flexDirection:"row",
     backgroundColor: '#000000',
     alignItems: 'center',
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   }, text2: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 75,
+    fontSize: 45,
   }, timerText: {
     color: '#fff',
     fontWeight: 'bold',
