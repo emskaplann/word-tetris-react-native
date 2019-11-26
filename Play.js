@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import { StyleSheet, Platform, Text, View, Button, TextInput} from 'react-native';
 import { styles } from './App.js';
 import MultipleWords from './MultipleWords.js';
 
@@ -13,7 +13,7 @@ import MultipleWords from './MultipleWords.js';
       height: '50%',
       width: '100%',
     }, input: {
-      position: 'absolute',
+      position: Platform.OS === 'ios' ? 'absolute' : 'relative',
       top: 400,
       width: '92%',
       height: 30,

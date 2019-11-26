@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, Platform, View, Button } from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from './Home.js'
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   }, inputUsername: {
-    fontSize: 50,
+    fontSize: Platform.OS === 'ios' ? 50 : 30,
     fontWeight: 'bold',
     color: '#fff',
     width: '80%',

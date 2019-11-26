@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Platform, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { styles } from './App.js';
 import TextForUsername from './TextForUsername.js';
 import { ButtonGroup } from 'react-native-elements';
