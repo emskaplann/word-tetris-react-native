@@ -45,12 +45,14 @@ export default class PlayScreen extends React.Component {
       userTime: 0,
       userScore: 0,
       userId: 0,
+      diff: 1,
     }
   }
 
   componentDidMount(){
     this.fetchWords()
     this.postFetchUser()
+    this.setState({diff: this.props.navigation.getParam('difficulty', '1')})
     this.interval = setInterval(this.decreaseTimer, 1000)
   }
 
