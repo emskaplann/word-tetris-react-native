@@ -102,6 +102,7 @@ export default class PlayScreen extends React.Component {
         if (article.description != null) {
             article.description.split(" ").forEach(word => {
                 word = word.replace(/[^a-zA-Z0-9 -]/g,"")
+                console.log(word)
                 if( word == "" || word == " " || word == "--" ){
 
                 } else {

@@ -29,6 +29,7 @@ export default class MultipleWords extends React.Component {
 
   addToActWords = () => {
     let randNum = Math.floor(Math.random() * this.props.words.length)
+    // console.log(this.props.words)
     this.setState({
       activeWords: [...this.state.activeWords, this.props.words[randNum]]
     })
