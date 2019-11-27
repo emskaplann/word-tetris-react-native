@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput } from 'react-native';
-import { styles } from './App.js'
+import { TextInput, Platform } from 'react-native';
 
 export default class TextForUsername extends React.Component {
   constructor(){
@@ -36,6 +35,18 @@ export default class TextForUsername extends React.Component {
   }
 
   render(){
+    const styles = {
+      inputUsername: {
+        fontSize: Platform.OS === 'ios' ? 50 : 30,
+        fontWeight: 'bold',
+        color: '#fff',
+        width: '80%',
+        height: 40,
+        borderRadius: 5,
+        backgroundColor: '#000000',
+        textAlign: 'center',
+      }
+    }
     return (
       <TextInput
         placeholder="username..."

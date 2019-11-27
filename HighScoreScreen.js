@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, ScrollView, Button} from 'react-native';
 import HSModal from './HighScoreModal.js';
-import { styles } from './App.js';
 
 
 // everything is working fine just need to style everything
@@ -80,6 +79,13 @@ export default class HighScoreScreen extends React.Component {
 
   render(){
     const navigation = this.props.navigation
+    const style = {container: {
+      flexDirection: 'column',
+      flex: 6,
+      backgroundColor: '#000000',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
     return(<View style={styles.container}>
 
             <HSModal userName={navigation.getParam('userName', 'noName')} time={navigation.getParam('time', 'noTime')} score={navigation.getParam('score', 'noScore')} />

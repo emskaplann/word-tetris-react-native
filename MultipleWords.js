@@ -1,8 +1,7 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Platform, TextInput, TouchableHighlight } from 'react-native';
 import Word from './Word.js'
-import { playScreenStyles } from './Play.js'
 
 export default class MultipleWords extends React.Component {
   constructor(){
@@ -67,13 +66,34 @@ export default class MultipleWords extends React.Component {
   }
 
   renderTextInput = () => {
-      return(<View style={playScreenStyles.inputContainer}>
+      const styles = {input: {
+        position: Platform.OS === 'ios' ? 'absolute' : 'relative',
+        top: 400,
+        width: '92%',
+        height: 30,
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: '#000000',
+        borderWidth: 1,
+        borderColor: '#000000',
+        borderRadius: 0,
+        backgroundColor: '#fff',
+        textAlign: 'left',
+      }, sendButton: {
+        position: 'absolute',
+        top: 400,
+        borderRadius: 0,
+        right: 0,
+        width: '8%',
+        backgroundColor: '#000000',
+      }}
+      return(<View style={styles.inputContainer}>
         <TextInput
-        style={playScreenStyles.input}
+        style={styles.input}
         onChangeText={(text) => this.handleInput(text)}
         value={this.state.input}
       />
-      <TouchableHighlight style={playScreenStyles.sendButton} onPress={()=> this.handleSubmit()}>
+    <TouchableHighlight style={styles.sendButton} onPress={()=> this.handleSubmit()}>
       <View>
         <Icon name="send" color="#fff" size={30}/>
       </View>

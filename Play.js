@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Platform, Text, View, Button, TextInput} from 'react-native';
-import { styles } from './App.js';
 import MultipleWords from './MultipleWords.js';
 
   export const playScreenStyles = {
@@ -32,6 +31,16 @@ import MultipleWords from './MultipleWords.js';
       right: 0,
       width: '8%',
       backgroundColor: '#000000',
+    }, container: {
+      flexDirection: 'column',
+      flex: 6,
+      backgroundColor: '#000000',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }, timerText: {
+      color: '#fff',
+      fontWeight: 'bold',
+      fontSize: 250,
     }
   }
 
@@ -84,7 +93,7 @@ export default class PlayScreen extends React.Component {
         if(this.state.timer !== 'Go!' && this.state.timer !== 1 && this.state.timer !== 2 && this.state.timer !== 3){
           return clearInterval(this.interval)
         }
-      return(<Text style={styles.timerText}>{this.state.timer}</Text>)
+      return(<Text style={playScreenStyles.timerText}>{this.state.timer}</Text>)
     } else {
       clearInterval(this.interval)
     }
@@ -102,7 +111,6 @@ export default class PlayScreen extends React.Component {
         if (article.description != null) {
             article.description.split(" ").forEach(word => {
                 word = word.replace(/[^a-zA-Z0-9 -]/g,"")
-                console.log(word)
                 if( word == "" || word == " " || word == "--" ){
 
                 } else {
@@ -178,7 +186,7 @@ export default class PlayScreen extends React.Component {
 
   render(){
       return (
-        <View style={styles.container}>
+        <View style={playScreenStyles.container}>
 
             { this.timer() }
             { this.renderGameBox() }

@@ -1,9 +1,8 @@
 import React from 'react';
-import { StyleSheet, Platform, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
-import { styles } from './App.js';
+import { Platform, Text, View, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
 import TextForUsername from './TextForUsername.js';
 import { ButtonGroup } from 'react-native-elements';
-
+import { styles } from './CustomStyles.js';
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
