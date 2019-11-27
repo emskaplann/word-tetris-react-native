@@ -69,7 +69,7 @@ export default class PlayScreen extends React.Component {
     if(this.state !== nextState || this.state.timer === 'finished'){
       return true
     }
-    return falser
+    return false
   }
 
   componentWillUnmount(){
