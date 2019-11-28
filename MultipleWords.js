@@ -40,11 +40,6 @@ export default class MultipleWords extends React.Component {
     })
   }
 
-  handleInput = (text2) => {
-    text = text2.toLowerCase()
-    this.setState({input: text})
-  }
-
   componentWillUnmount(){
     clearInterval(this.interval)
     clearInterval(this.interval2)
@@ -90,18 +85,19 @@ export default class MultipleWords extends React.Component {
         width: '8%',
         backgroundColor: '#000000',
       }}
-      return(<View style={styles.inputContainer}>
+      return(
+      <View style={styles.inputContainer}>
         <TextInput
         style={styles.input}
-        onChangeText={(text) => this.handleInput(text)}
+        onChangeText={(text) => this.setState({input: text.toLowerCase()})}
         value={this.state.input}
-      />
-    <TouchableHighlight style={styles.sendButton} onPress={()=> this.handleSubmit()}>
-      <View>
-        <Icon name="send" color="#fff" size={30}/>
-      </View>
-      </TouchableHighlight>
-    </View>)
+        />
+        <TouchableHighlight style={styles.sendButton} onPress={()=> this.handleSubmit()}>
+          <View>
+            <Icon name="send" color="#fff" size={30}/>
+          </View>
+          </TouchableHighlight>
+      </View>)
   }
 
   renderWords = () => {
