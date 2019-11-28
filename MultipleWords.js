@@ -67,7 +67,7 @@ export default class MultipleWords extends React.Component {
   }
 
   renderTextInput = () => {
-      const limitNum = Platform.OS == 'ios' ? 40 : 30
+      const limitNum = Platform.OS == 'ios' ? 40 : 29
       const inputLocation = (this.props.deviceHeight / 100) * limitNum
       const styles = {input: {
         position: 'absolute',

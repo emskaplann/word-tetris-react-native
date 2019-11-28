@@ -9,7 +9,7 @@ import MultipleWords from './MultipleWords.js';
       position: 'absolute',
       top: 0,
       backgroundColor: '#fff',
-      height: Platform.OS == 'ios' ? '45%' : '35%',
+      height: Platform.OS == 'ios' ? '45%' : '40%',
       width: '100%',
     }, container: {
       flexDirection: 'column',
@@ -92,7 +92,7 @@ export default class PlayScreen extends React.Component {
         if (article.description != null) {
             article.description.split(" ").forEach(word => {
                 word = word.replace(/[^a-zA-Z0-9 -]/g,"")
-                if( word == "" || word == " " || word == "--" || this.state.words.includes(word) ){
+                if( word == "" || word == " " || word == "--" || this.state.words.includes(word) || word.includes('-')){
 
                 } else {
                   this.setState({words: [...this.state.words, word.toLowerCase()]})
@@ -101,7 +101,6 @@ export default class PlayScreen extends React.Component {
              })
             }
           })
-          this.setState({words: [...new Set(this.state.words)]})
         })
       }
 
