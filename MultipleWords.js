@@ -67,7 +67,7 @@ export default class MultipleWords extends React.Component {
 
   renderTextInput = () => {
       const styles = {input: {
-        position: Platform.OS === 'ios' ? 'absolute' : 'relative',
+        position: 'absolute',
         top: 400,
         width: '92%',
         height: 30,

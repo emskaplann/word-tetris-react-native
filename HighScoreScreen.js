@@ -86,7 +86,11 @@ export default class HighScoreScreen extends React.Component {
       alignItems: 'center',
       justifyContent: 'center',
     }}
-    return(<View style={styles.container}>
+    return(<View style={{flexDirection: 'column',
+    flex: 6,
+    backgroundColor: '#000000',
+    alignItems: 'center',
+    justifyContent: 'center'}}>
 
             <HSModal userName={navigation.getParam('userName', 'noName')} time={navigation.getParam('time', 'noTime')} score={navigation.getParam('score', 'noScore')} />
             <Text style={{

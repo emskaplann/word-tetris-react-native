@@ -176,6 +176,7 @@ export default class PlayScreen extends React.Component {
     if(this.state.timer === 'finished'){
       return (
                 <View style={playScreenStyles.gameBox}>
+
                   <MultipleWords words={this.state.words} difficulty={this.state.diff} handleEndGame={this.handleEndGame} sendGameInfo={this.takeGameInfo}/>
                 </View>
                 )
@@ -187,7 +188,6 @@ export default class PlayScreen extends React.Component {
   render(){
       return (
         <View style={playScreenStyles.container}>
-
             { this.timer() }
             { this.renderGameBox() }
         </View>
