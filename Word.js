@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, Text, View, Button } from 'react-native';
+import { StyleSheet, Dimensions, Text, View, Button, Platform } from 'react-native';
 
 const style = {
   slidingWords: {
@@ -31,7 +31,8 @@ export default class Word extends React.Component {
     this.setState({
       positionTop: this.state.positionTop + 0.5
     }, function(){
-      const limit = Math.floor((Math.round(Dimensions.get('window').height) / 100) * 40 )
+      const limitNum = Platform.OS == 'ios' ? 40 : 30
+      const limit = Math.floor((Math.round(Dimensions.get('window').height) / 100) * limitNum )
       if(this.state.positionTop >= limit){
         this.props.handleEndGame()
       };

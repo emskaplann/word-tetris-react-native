@@ -9,7 +9,7 @@ import MultipleWords from './MultipleWords.js';
       position: 'absolute',
       top: 0,
       backgroundColor: '#fff',
-      height: '40%',
+      height: Platform.OS == 'ios' ? '45%' : '35%',
       width: '100%',
     }, container: {
       flexDirection: 'column',
@@ -45,12 +45,13 @@ export default class PlayScreen extends React.Component {
     this.interval = setInterval(this.decreaseTimer, 1000)
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    if(this.state !== nextState || this.state.timer === 'finished'){
-      return true
-    }
-    return false
-  }
+  // this lifecycle method is so buggy on android be careful next time!
+  // shouldComponentUpdate(nextProps, nextState){
+  //   if(this.state !== nextState || this.state.timer === 'finished'){
+  //     return true
+  //   }
+  //   return false
+  // }
 
   componentWillUnmount(){
     clearInterval(this.interval)
