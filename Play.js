@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Platform, Text, View, Button, TextInput} from 'react-native';
+import { StyleSheet, Platform, Text, View} from 'react-native';
 import MultipleWords from './MultipleWords.js';
 
   export const playScreenStyles = {
@@ -9,28 +9,8 @@ import MultipleWords from './MultipleWords.js';
       position: 'absolute',
       top: 0,
       backgroundColor: '#fff',
-      height: '50%',
+      height: '40%',
       width: '100%',
-    }, input: {
-      position: Platform.OS === 'ios' ? 'absolute' : 'relative',
-      top: 400,
-      width: '92%',
-      height: 30,
-      fontSize: 25,
-      fontWeight: 'bold',
-      color: '#000000',
-      borderWidth: 1,
-      borderColor: '#000000',
-      borderRadius: 0,
-      backgroundColor: '#fff',
-      textAlign: 'left',
-    }, sendButton: {
-      position: 'absolute',
-      top: 400,
-      borderRadius: 0,
-      right: 0,
-      width: '8%',
-      backgroundColor: '#000000',
     }, container: {
       flexDirection: 'column',
       flex: 6,
@@ -111,7 +91,7 @@ export default class PlayScreen extends React.Component {
         if (article.description != null) {
             article.description.split(" ").forEach(word => {
                 word = word.replace(/[^a-zA-Z0-9 -]/g,"")
-                if( word == "" || word == " " || word == "--" ){
+                if( word == "" || word == " " || word == "--" || this.state.words.includes(word) ){
 
                 } else {
                   this.setState({words: [...this.state.words, word.toLowerCase()]})
@@ -177,7 +157,7 @@ export default class PlayScreen extends React.Component {
       return (
                 <View style={playScreenStyles.gameBox}>
 
-                  <MultipleWords words={this.state.words} difficulty={this.state.diff} handleEndGame={this.handleEndGame} sendGameInfo={this.takeGameInfo}/>
+                  <MultipleWords words={this.state.words} deviceHeight={this.props.navigation.getParam('deviceHeight', '700')} difficulty={this.state.diff} sendGameInfo={this.takeGameInfo}/>
                 </View>
                 )
     } else {

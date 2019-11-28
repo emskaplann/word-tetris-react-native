@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, Text, View, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
+import { Platform, Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import TextForUsername from './TextForUsername.js';
 import { ButtonGroup } from 'react-native-elements';
 import { styles } from './CustomStyles.js';
@@ -15,6 +15,7 @@ export default class HomeScreen extends React.Component {
         alert: false,
         textValue: "",
         selectedDiff: 1,
+        deviceHeight: Math.round(Dimensions.get('window').height),
       }
     }
 
@@ -28,7 +29,7 @@ export default class HomeScreen extends React.Component {
       const {navigate} = this.props.navigation
 
       if(this.state.textValue !== ""){
-        navigate('Play', {userName: this.state.textValue, difficulty: this.state.selectedDiff})
+        navigate('Play', {userName: this.state.textValue, difficulty: this.state.selectedDiff, deviceHeight: this.state.deviceHeight})
         this.setState({alert: false})
         this.changeAlert(false)
       } else {
@@ -64,8 +65,11 @@ export default class HomeScreen extends React.Component {
     }
 
     render(){
+      // assigning buttons for difficulty choose
       const buttons = ['easy', 'medium', 'hard']
       const { newDiff } = this.state.selectedDiff
+      // checking device height for layout style purposes
+      console.log(this.state.deviceHeight)
       return (
       <View style={styles.container}>
           <View style={styles.subContainer}>

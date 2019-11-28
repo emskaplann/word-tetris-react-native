@@ -14,7 +14,7 @@ export default class HSModal extends React.Component {
       <View>
         <Modal
           animationType="slide"
-          transparent="true"
+          transparent={true}
           visible={this.state.visible}
           onRequestClose={() => {this.setState({visible: false})}}
           >

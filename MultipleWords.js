@@ -52,6 +52,7 @@ export default class MultipleWords extends React.Component {
 
   beforeHandleGame = () => {
     this.props.sendGameInfo(this.state.time, this.state.score)
+    this.setState({ activeWords: [] })
   }
 
   handleSubmit(){
@@ -66,9 +67,10 @@ export default class MultipleWords extends React.Component {
   }
 
   renderTextInput = () => {
+      const inputLocation = (this.props.deviceHeight / 100) * 45
       const styles = {input: {
         position: 'absolute',
-        top: 400,
+        top: inputLocation,
         width: '92%',
         height: 30,
         fontSize: 25,
@@ -81,7 +83,7 @@ export default class MultipleWords extends React.Component {
         textAlign: 'left',
       }, sendButton: {
         position: 'absolute',
-        top: 400,
+        top: inputLocation,
         borderRadius: 0,
         right: 0,
         width: '8%',

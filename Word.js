@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Dimensions, Text, View, Button } from 'react-native';
 
-// bottom for gameBox is top: 390
 const style = {
   slidingWords: {
     color: '#000000',
@@ -32,7 +31,8 @@ export default class Word extends React.Component {
     this.setState({
       positionTop: this.state.positionTop + 0.5
     }, function(){
-      if(this.state.positionTop === 390){
+      const limit = Math.floor((Math.round(Dimensions.get('window').height) / 100) * 40 )
+      if(this.state.positionTop >= limit){
         this.props.handleEndGame()
       };
     })
