@@ -45,8 +45,14 @@ export default class MultipleWords extends React.Component {
     clearInterval(this.interval2)
   }
 
+  clearIntervals = () => {
+    clearInterval(this.interval)
+    clearInterval(this.interval2)
+  }
+
   beforeHandleGame = () => {
     this.props.sendGameInfo(this.state.time, this.state.score)
+    this.clearIntervals()
     this.setState({ activeWords: [] })
   }
 
@@ -57,7 +63,7 @@ export default class MultipleWords extends React.Component {
         this.setState({activeWords: fakeArr, input: "", score: this.state.score + text.length})
     } else {
       // do reject animation!
-      console.log('add animation')
+      // console.log('add animation')
     }
   }
 
@@ -68,8 +74,7 @@ export default class MultipleWords extends React.Component {
       const styles = {inputContainer: {
         backgroundColor: '#000000',
         width: '100%',
-        height: 60,
-        position: 'absolute',
+        height: '100%',
         top: inputLocation,
       }, input: {
         width: '92%',
@@ -81,7 +86,6 @@ export default class MultipleWords extends React.Component {
         borderColor: '#000000',
         borderRadius: 0,
         backgroundColor: '#fff',
-        textAlign: 'left',
       }, sendButton: {
         position: 'absolute',
         right: 0,
@@ -96,16 +100,13 @@ export default class MultipleWords extends React.Component {
         value={this.state.input}
         />
         <TouchableHighlight style={styles.sendButton} onPress={()=> this.handleSubmit()}>
-          <View>
             <Icon name="send" color="#fff" size={30}/>
-          </View>
-          </TouchableHighlight>
+        </TouchableHighlight>
       </View>)
   }
 
   renderWords = () => {
-    const transformedArray = this.state.activeWords.map((word) =>
-    <Word text={word} key={word} handleEndGame={this.beforeHandleGame} />)
+    const transformedArray = this.state.activeWords.map((word) => <Word text={word} key={word} handleEndGame={this.beforeHandleGame} />)
     return transformedArray;
   }
 

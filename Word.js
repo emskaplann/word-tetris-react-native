@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Dimensions, Text, View, Button, Platform } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 const style = {
   slidingWords: {
