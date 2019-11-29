@@ -53,6 +53,13 @@ export default class PlayScreen extends React.Component {
   //   return false
   // }
 
+  shouldComponentUpdate(nextProps, nextState){
+    if(this.state.timer !== nextState.timer){
+      return true
+    }
+    return false
+  }
+
   componentWillUnmount(){
     clearInterval(this.interval)
   }
@@ -154,13 +161,14 @@ export default class PlayScreen extends React.Component {
 
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
-      return (<MultipleWords words={this.state.words} deviceHeight={this.props.navigation.getParam('deviceHeight', '700')} difficulty={this.state.diff} sendGameInfo={this.takeGameInfo}/>)
+      return (<MultipleWords words={this.state.words} difficulty={this.state.diff} sendGameInfo={this.takeGameInfo}/>)
     } else {
       return(<Text style={playScreenStyles.text}>Something went wrong :/</Text>)
     }
   }
 
   render(){
+    console.log("play updated")
       return (
         <View style={playScreenStyles.container}>
             { this.timer() }

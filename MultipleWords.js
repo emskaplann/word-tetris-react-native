@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Platform, TextInput, TouchableHighlight } from 'react-native';
 import Word from './Word.js'
+import WordInput from './WordInput.js'
 
 export default class MultipleWords extends React.Component {
   constructor(){
@@ -9,7 +10,6 @@ export default class MultipleWords extends React.Component {
 
     this.state = {
       activeWords: ["test"],
-      input: "",
       score: 0,
       time: 0,
     }
@@ -40,6 +40,13 @@ export default class MultipleWords extends React.Component {
     })
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    if(this.state.activeWords !== nextState.activeWords){
+      return true
+    }
+    return false
+  }
+
   componentWillUnmount(){
     clearInterval(this.interval)
     clearInterval(this.interval2)
@@ -56,11 +63,10 @@ export default class MultipleWords extends React.Component {
     this.setState({ activeWords: [] })
   }
 
-  handleSubmit(){
-    let text = this.state.input
+  handleSubmit = (text) => {
     if(this.state.activeWords.includes(text)){
         let fakeArr = this.state.activeWords.filter(word => word !== text)
-        this.setState({activeWords: fakeArr, input: "", score: this.state.score + text.length})
+        this.setState({activeWords: fakeArr, score: this.state.score + text.length})
     } else {
       // do reject animation!
       // console.log('add animation')
@@ -68,41 +74,7 @@ export default class MultipleWords extends React.Component {
   }
 
   renderTextInput = () => {
-      // nov 28, 2019 => limitNum 33 is working
-      const limitNum = Platform.OS == 'ios' ? 40 : 40
-      const inputLocation = (this.props.deviceHeight / 100) * limitNum
-      const styles = {inputContainer: {
-        backgroundColor: '#000000',
-        width: '100%',
-        height: '100%',
-        top: inputLocation,
-      }, input: {
-        width: '92%',
-        height: 30,
-        fontSize: 25,
-        fontWeight: 'bold',
-        color: '#000000',
-        borderWidth: 1,
-        borderColor: '#000000',
-        borderRadius: 0,
-        backgroundColor: '#fff',
-      }, sendButton: {
-        position: 'absolute',
-        right: 0,
-        width: '8%',
-        backgroundColor: '#000000',
-      }}
-      return(
-      <View style={styles.inputContainer}>
-        <TextInput
-        style={styles.input}
-        onChangeText={(text) => this.setState({input: text.toLowerCase()})}
-        value={this.state.input}
-        />
-        <TouchableHighlight style={styles.sendButton} onPress={()=> this.handleSubmit()}>
-            <Icon name="send" color="#fff" size={30}/>
-        </TouchableHighlight>
-      </View>)
+      return(<WordInput handleSubmit={this.handleSubmit}/>)
   }
 
   renderWords = () => {
@@ -118,6 +90,7 @@ export default class MultipleWords extends React.Component {
       height: Platform.OS == 'ios' ? '45%' : '55%',
       width: '100%',
     }}
+    console.log('mpwords updated')
     return(<View style={styles2.gameBox}>
             { this.renderWords() }
             { this.renderTextInput() }
