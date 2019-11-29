@@ -62,11 +62,16 @@ export default class MultipleWords extends React.Component {
   }
 
   renderTextInput = () => {
-      const limitNum = Platform.OS == 'ios' ? 40 : 29
+      // nov 28, 2019 => limitNum 33 is working
+      const limitNum = Platform.OS == 'ios' ? 40 : 40
       const inputLocation = (this.props.deviceHeight / 100) * limitNum
-      const styles = {input: {
+      const styles = {inputContainer: {
+        backgroundColor: '#000000',
+        width: '100%',
+        height: 60,
         position: 'absolute',
         top: inputLocation,
+      }, input: {
         width: '92%',
         height: 30,
         fontSize: 25,
@@ -79,8 +84,6 @@ export default class MultipleWords extends React.Component {
         textAlign: 'left',
       }, sendButton: {
         position: 'absolute',
-        top: inputLocation,
-        borderRadius: 0,
         right: 0,
         width: '8%',
         backgroundColor: '#000000',
@@ -107,7 +110,14 @@ export default class MultipleWords extends React.Component {
   }
 
   render(){
-    return(<View>
+    const styles2 = {gameBox: {
+      position: 'absolute',
+      top: 0,
+      backgroundColor: '#fff',
+      height: Platform.OS == 'ios' ? '45%' : '55%',
+      width: '100%',
+    }}
+    return(<View style={styles2.gameBox}>
             { this.renderWords() }
             { this.renderTextInput() }
           </View>)

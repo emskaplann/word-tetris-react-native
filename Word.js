@@ -31,7 +31,7 @@ export default class Word extends React.Component {
     this.setState({
       positionTop: this.state.positionTop + 0.5
     }, function(){
-      const limitNum = Platform.OS == 'ios' ? 40 : 34
+      const limitNum = Platform.OS == 'ios' ? 40 : 40
       const limit = Math.floor((Math.round(Dimensions.get('window').height) / 100) * limitNum )
       if(this.state.positionTop >= limit){
         this.props.handleEndGame()

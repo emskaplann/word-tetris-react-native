@@ -154,12 +154,7 @@ export default class PlayScreen extends React.Component {
 
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
-      return (
-                <View style={playScreenStyles.gameBox}>
-
-                  <MultipleWords words={this.state.words} deviceHeight={this.props.navigation.getParam('deviceHeight', '700')} difficulty={this.state.diff} sendGameInfo={this.takeGameInfo}/>
-                </View>
-                )
+      return (<MultipleWords words={this.state.words} deviceHeight={this.props.navigation.getParam('deviceHeight', '700')} difficulty={this.state.diff} sendGameInfo={this.takeGameInfo}/>)
     } else {
       return(<Text style={playScreenStyles.text}>Something went wrong :/</Text>)
     }
