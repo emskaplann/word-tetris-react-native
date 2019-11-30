@@ -28,7 +28,7 @@ export default class PlayScreen extends React.Component {
   constructor(){
     super();
     this.state = {
-      timer: 3,
+      timer: 1,
       gameBoxRendered: false,
       words: [],
       userTime: 0,
@@ -97,12 +97,12 @@ export default class PlayScreen extends React.Component {
       .then(response => {
         response.articles.forEach(article => {
         if (article.description != null) {
-            article.description.split(" ").forEach(word => {
+            article.description.split(" ").forEach((word) => {
                 word = word.replace(/[^a-zA-Z0-9 -]/g,"")
                 if( word == "" || word == " " || word == "--" || this.state.words.includes(word) || word.includes('-')){
 
                 } else {
-                  this.setState({words: [...this.state.words, word.toLowerCase()]})
+                  this.setState({words: [...this.state.words, {word: {self: word.toLowerCase(), shouldAnimate: false}}]})
                 }
                 // fetch works properly
              })

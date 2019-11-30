@@ -35,7 +35,7 @@ export default class WordInput extends React.Component {
   }
 
   handleTextChange = (text) => {
-    this.setState({input: text})
+    this.setState({input: text.toLowerCase()})
   }
 
   handleSubmit = () => {

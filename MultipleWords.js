@@ -3,13 +3,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Platform, TextInput, TouchableHighlight } from 'react-native';
 import Word from './Word.js'
 import WordInput from './WordInput.js'
+import * as Animatable from 'react-native-animatable';
+
 
 export default class MultipleWords extends React.Component {
   constructor(){
     super();
 
     this.state = {
-      activeWords: ["test"],
+      activeWords: [{word: {self: "test", shouldAnimate: false}}],
       score: 0,
       time: 0,
     }
@@ -50,8 +52,7 @@ export default class MultipleWords extends React.Component {
   }
 
   componentWillUnmount(){
-    clearInterval(this.interval)
-    clearInterval(this.interval2)
+    this.clearIntervals()
   }
 
   clearIntervals = () => {
@@ -65,22 +66,35 @@ export default class MultipleWords extends React.Component {
     this.setState({ activeWords: [] })
   }
 
-  handleSubmit = (text) => {
-    if(this.state.activeWords.includes(text)){
-        let fakeArr = this.state.activeWords.filter(word => word !== text)
-        this.setState({activeWords: fakeArr, score: this.state.score + text.length})
-    } else {
-      // do reject animation!
-      // console.log('add animation')
+  checkForWord = (text) => {
+    let word = this.state.activeWords.find(el => {
+      return el.word.self == text
+    })
+    if(word !== undefined){
+      return true
     }
   }
+
+  handleSubmit = (text) => {
+    let fakeArr = this.state.activeWords.filter(word => word.word.self !== text)
+    if(this.checkForWord(text)){
+      this.setState({activeWords: fakeArr, score: this.state.score + text.length})
+    } else {
+      this.shake()
+    }
+  }
+
+  // Animation for gameBox
+  handleViewRef = ref => this.view = ref;
+  shake = () => this.view.shake(300).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+
 
   renderTextInput = () => {
       return(<WordInput handleSubmit={this.handleSubmit}/>)
   }
 
   renderWords = () => {
-    const transformedArray = this.state.activeWords.map((word) => <Word text={word} key={word} handleEndGame={this.beforeHandleGame} />)
+    const transformedArray = this.state.activeWords.map((word) => <Word text={word.word.self} key={word.word.self} shouldAnimate={word.word.shouldAnimate} handleEndGame={this.beforeHandleGame} />)
     return transformedArray;
   }
 
@@ -92,9 +106,9 @@ export default class MultipleWords extends React.Component {
       height: Platform.OS == 'ios' ? '45%' : '55%',
       width: '100%',
     }}
-    return(<View style={styles2.gameBox}>
+    return(<Animatable.View ref={this.handleViewRef} style={styles2.gameBox}>
             { this.renderWords() }
             { this.renderTextInput() }
-          </View>)
+          </Animatable.View>)
   }
 }

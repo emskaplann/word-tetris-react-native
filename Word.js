@@ -43,6 +43,10 @@ export default class Word extends React.Component {
     })
   }
 
+  // Animation --- Still incomplete
+  handleTextRef = ref => this.text = ref;
+  bounce = () => this.text.pulse(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+
     renderWord = () => {
       const style2 = {
         color: '#000000',
@@ -52,7 +56,7 @@ export default class Word extends React.Component {
         top: this.state.positionTop,
         left: this.state.positionLeft
       }
-      return(<Text style={style2}>{this.props.text}</Text>)
+      return(<Animatable.Text style={style2} ref={this.handleTextRef}>{this.props.text}</Animatable.Text>)
     }
 
     render(){
