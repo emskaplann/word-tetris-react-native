@@ -163,12 +163,11 @@ export default class PlayScreen extends React.Component {
     if(this.state.timer === 'finished'){
       return (<MultipleWords words={this.state.words} difficulty={this.state.diff} sendGameInfo={this.takeGameInfo}/>)
     } else {
-      return(<Text style={playScreenStyles.text}>Something went wrong :/</Text>)
+      // return(<Text style={playScreenStyles.text}>Something went wrong :/</Text>)
     }
   }
 
   render(){
-    console.log("play updated")
       return (
         <View style={playScreenStyles.container}>
             { this.timer() }

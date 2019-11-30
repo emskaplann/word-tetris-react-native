@@ -28,7 +28,9 @@ export default class MultipleWords extends React.Component {
 
   addToActWords = () => {
     let randNum = Math.floor(Math.random() * this.props.words.length)
-    // console.log(this.props.words)
+    while(this.state.activeWords.includes(this.props.words[randNum])){
+      randNum = Math.floor(Math.random() * this.props.words.length)
+    }
     this.setState({
       activeWords: [...this.state.activeWords, this.props.words[randNum]]
     })
@@ -90,7 +92,6 @@ export default class MultipleWords extends React.Component {
       height: Platform.OS == 'ios' ? '45%' : '55%',
       width: '100%',
     }}
-    console.log('mpwords updated')
     return(<View style={styles2.gameBox}>
             { this.renderWords() }
             { this.renderTextInput() }

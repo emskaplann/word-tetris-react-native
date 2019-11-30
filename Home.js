@@ -65,6 +65,7 @@ export default class HomeScreen extends React.Component {
     }
 
     render(){
+
       // assigning buttons for difficulty choose
       const buttons = ['easy', 'medium', 'hard']
       const { newDiff } = this.state.selectedDiff

@@ -21,7 +21,9 @@ export default class Word extends React.Component {
   }
 
   componentDidMount(){
-    this.interval = setInterval(this.slideWord, 10)
+    // ideal number for android => 55-60
+    const repeatRate = Platform.OS == 'ios' ? 15 : 55
+    this.interval = setInterval(this.slideWord, repeatRate)
   }
 
   componentWillUnmount(){
@@ -29,8 +31,9 @@ export default class Word extends React.Component {
   }
 
   slideWord = () => {
+    const increaseRate = Platform.OS == 'ios' ? 0.52 : 0.8
     this.setState({
-      positionTop: this.state.positionTop + 0.5
+      positionTop: this.state.positionTop + increaseRate
     }, function(){
       const limitNum = Platform.OS == 'ios' ? 40 : 40
       const limit = Math.floor((Math.round(Dimensions.get('window').height) / 100) * limitNum )
@@ -53,7 +56,6 @@ export default class Word extends React.Component {
     }
 
     render(){
-      // console.log(this.props)
       return(this.renderWord())
     }
 }
