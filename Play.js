@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Platform, Text, View} from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import MultipleWords from './MultipleWords.js';
 
   export const playScreenStyles = {
@@ -45,14 +46,6 @@ export default class PlayScreen extends React.Component {
     this.interval = setInterval(this.decreaseTimer, 1000)
   }
 
-  // this lifecycle method is so buggy on android be careful next time!
-  // shouldComponentUpdate(nextProps, nextState){
-  //   if(this.state !== nextState || this.state.timer === 'finished'){
-  //     return true
-  //   }
-  //   return false
-  // }
-
   shouldComponentUpdate(nextProps, nextState){
     if(this.state.timer !== nextState.timer){
       return true
@@ -81,7 +74,7 @@ export default class PlayScreen extends React.Component {
         if(this.state.timer !== 'Go!' && this.state.timer !== 1 && this.state.timer !== 2 && this.state.timer !== 3){
           return clearInterval(this.interval)
         }
-      return(<Text style={playScreenStyles.timerText}>{this.state.timer}</Text>)
+      return(<Animatable.Text animation="pulse" duration={1100} iterationCount={3} style={playScreenStyles.timerText}>{this.state.timer}</Animatable.Text>)
     } else {
       clearInterval(this.interval)
     }
@@ -102,7 +95,7 @@ export default class PlayScreen extends React.Component {
                 if( word == "" || word == " " || word == "--" || this.state.words.includes(word) || word.includes('-')){
 
                 } else {
-                  this.setState({words: [...this.state.words, {word: {self: word.toLowerCase(), shouldAnimate: false}}]})
+                  this.setState({words: [...this.state.words, word.toLowerCase()]})
                 }
                 // fetch works properly
              })
@@ -161,7 +154,7 @@ export default class PlayScreen extends React.Component {
 
   renderGameBox = () => {
     if(this.state.timer === 'finished'){
-      return (<MultipleWords words={this.state.words} difficulty={this.state.diff} sendGameInfo={this.takeGameInfo}/>)
+      return (<MultipleWords words={this.state.words} username={this.props.navigation.getParam('userName', 'uName')} difficulty={this.state.diff} sendGameInfo={this.takeGameInfo}/>)
     } else {
       // return(<Text style={playScreenStyles.text}>Something went wrong :/</Text>)
     }

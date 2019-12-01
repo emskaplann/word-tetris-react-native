@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Platform, TextInput, TouchableHighlight, Dimensions } from 'react-native';
 
-const limitNum = Platform.OS == 'ios' ? 40 : 40
+const limitNum = Platform.OS == 'ios' ? 45 : 40
 const inputLocation = (Math.round(Dimensions.get('window').height) / 100) * limitNum
 const styles = {inputContainer: {
   backgroundColor: '#000000',

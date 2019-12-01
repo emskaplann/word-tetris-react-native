@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, ScrollView, Button} from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import HSModal from './HighScoreModal.js';
 
 
@@ -85,12 +86,15 @@ export default class HighScoreScreen extends React.Component {
       backgroundColor: '#000000',
       alignItems: 'center',
       justifyContent: 'center',
+    }, subContainer: {
+      flex:1,
+      flexDirection:"row",
+      backgroundColor: '#000000',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 10
     }}
-    return(<View style={{flexDirection: 'column',
-    flex: 6,
-    backgroundColor: '#000000',
-    alignItems: 'center',
-    justifyContent: 'center'}}>
+    return(<View style={style.container}>
 
             <HSModal userName={navigation.getParam('userName', 'noName')} time={navigation.getParam('time', 'noTime')} score={navigation.getParam('score', 'noScore')} />
             <Text style={{
@@ -100,16 +104,25 @@ export default class HighScoreScreen extends React.Component {
                 fontSize: 50,
                 color: "#fff"
               }}>{this.renderHSLabel()}</Text>
-            <View style={{height: "85%"}}>
+              <View style={style.subContainer}></View>
+            <View style={style.subContainer}></View>
+            <View style={{height: "90%"}}>
               <ScrollView style={{marginHorizontal: 20, top: 0}}>
                 {this.renderTimeScores()}
               </ScrollView>
-              <Button
-                title={this.state.buttonTitle}
+              <TouchableOpacity
+                style={{alignItems: 'center',
+                padding: 5,
+                borderRadius: 5,
+                backgroundColor: '#000000',
+                fontWeight: 'bold'}}
+                title="Play!"
                 onPress={this.handleBtn}
-                color="#fff"
-                />
+              >
+              <Animatable.Text animation="pulse" duration={600} iterationCount="infinite" direction="alternate" style={{color: "#fff", fontSize: 25}}>{this.state.buttonTitle}</Animatable.Text>
+            </TouchableOpacity>
            </View>
-          </View>)
+           <View style={style.subContainer}></View>
+         </View>)
   }
 }

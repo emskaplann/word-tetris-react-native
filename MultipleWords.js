@@ -11,9 +11,10 @@ export default class MultipleWords extends React.Component {
     super();
 
     this.state = {
-      activeWords: [{word: {self: "test", shouldAnimate: false}}],
+      activeWords: [],
       score: 0,
       time: 0,
+      wordLoc: {positionTop: 0, positionLeft: 0, length: 0}
     }
   }
 
@@ -45,7 +46,7 @@ export default class MultipleWords extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if(this.state.activeWords !== nextState.activeWords){
+    if(this.state.activeWords !== nextState.activeWords || this.state.wordLoc !== nextState.wordLoc){
       return true
     }
     return false
@@ -66,18 +67,9 @@ export default class MultipleWords extends React.Component {
     this.setState({ activeWords: [] })
   }
 
-  checkForWord = (text) => {
-    let word = this.state.activeWords.find(el => {
-      return el.word.self == text
-    })
-    if(word !== undefined){
-      return true
-    }
-  }
-
   handleSubmit = (text) => {
-    let fakeArr = this.state.activeWords.filter(word => word.word.self !== text)
-    if(this.checkForWord(text)){
+    let fakeArr = this.state.activeWords.filter(word => word !== text)
+    if(this.state.activeWords.includes(text)){
       this.setState({activeWords: fakeArr, score: this.state.score + text.length})
     } else {
       this.shake()
@@ -86,15 +78,29 @@ export default class MultipleWords extends React.Component {
 
   // Animation for gameBox
   handleViewRef = ref => this.view = ref;
-  shake = () => this.view.shake(300).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+  shake = () => this.view.shake(300)
 
 
   renderTextInput = () => {
       return(<WordInput handleSubmit={this.handleSubmit}/>)
   }
 
+  sendWordLoc = (wordLoc) => {
+    this.setState({wordLoc: wordLoc})
+  }
+
+  renderGains = () => {
+    if(this.state.wordLoc.length !== 0)
+    return(<Text style={{color: '#000000',
+    fontWeight: 'bold',
+    fontSize: 20,
+    position: 'absolute',
+    left: this.state.wordLoc.positionLeft,
+    top: this.state.wordLoc.positionTop}}>+{this.state.wordLoc.length}</Text>)
+  }
+
   renderWords = () => {
-    const transformedArray = this.state.activeWords.map((word) => <Word text={word.word.self} key={word.word.self} shouldAnimate={word.word.shouldAnimate} handleEndGame={this.beforeHandleGame} />)
+    const transformedArray = this.state.activeWords.map((word) => <Word text={word} key={word} sendWordLoc={this.sendWordLoc} handleEndGame={this.beforeHandleGame}/>)
     return transformedArray;
   }
 
@@ -103,10 +109,12 @@ export default class MultipleWords extends React.Component {
       position: 'absolute',
       top: 0,
       backgroundColor: '#fff',
-      height: Platform.OS == 'ios' ? '45%' : '55%',
+      height: Platform.OS == 'ios' ? '55%' : '55%',
       width: '100%',
     }}
     return(<Animatable.View ref={this.handleViewRef} style={styles2.gameBox}>
+            <View style={{positon: 'absolute', top: 0, backgroundColor: "#000000"}}><Text style={{color: "#fff", alignSelf: 'flex-start', fontSize: 10, fontWeight: 'bold'}}>score: {this.state.score}</Text><Text style={{color: "#fff", alignSelf: 'flex-end', position: 'absolute', top: 0,fontSize: 10, fontWeight: 'bold'}}>time: {this.state.time}</Text><Text style={{color: "#fff", alignSelf: 'center', position: 'absolute', top: 0,fontSize: 10, fontWeight: 'bold'}}>{this.props.username}</Text></View>
+            { this.renderGains() }
             { this.renderWords() }
             { this.renderTextInput() }
           </Animatable.View>)

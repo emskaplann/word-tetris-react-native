@@ -49,7 +49,7 @@ export default class TextForUsername extends React.Component {
     }
     return (
       <TextInput
-        placeholder="username..."
+        placeholder="max 7 char."
         style={styles.inputUsername}
         onChangeText={(text) => this.handleInput(text)}
         value={this.state.text}

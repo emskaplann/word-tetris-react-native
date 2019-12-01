@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import TextForUsername from './TextForUsername.js';
 import { ButtonGroup } from 'react-native-elements';
 import { styles } from './CustomStyles.js';
@@ -12,6 +13,7 @@ export default class HomeScreen extends React.Component {
       super();
 
       this.state = {
+        intro: true,
         alert: false,
         textValue: "",
         selectedDiff: 1,
@@ -50,7 +52,7 @@ export default class HomeScreen extends React.Component {
 // rendering alert message for blank username field...
     showAlertMsg = () => {
       if(this.state.alert === false){
-
+        return( <Text style={styles.text}>username</Text> )
       } else if(this.state.alert === true){
         return( <Text style={styles.text}>put username.</Text> )
       }
@@ -73,7 +75,7 @@ export default class HomeScreen extends React.Component {
       console.log(this.state.deviceHeight)
       return (
       <View style={styles.container}>
-          <View style={styles.subContainer}>
+          <View style={styles.smSubContainer}>
             {this.showAlertMsg()}
           </View>
         <View style={styles.subContainer}>
@@ -85,7 +87,7 @@ export default class HomeScreen extends React.Component {
               title="Play!"
               onPress={this.handleSubmit}
             >
-              <Text style={styles.text2}>play {buttons[this.state.selectedDiff]}</Text>
+            <Animatable.Text animation="pulse" duration={600} iterationCount="infinite" direction="alternate" style={styles.text2}><Text>play {buttons[this.state.selectedDiff]}</Text></Animatable.Text>
             </TouchableOpacity>
         </View>
         <View style={styles.subContainer}>

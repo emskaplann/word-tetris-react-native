@@ -14,6 +14,12 @@ export const styles = StyleSheet.create({
     backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'center',
+  }, smSubContainer: {
+    flex:0.7,
+    flexDirection:"row",
+    backgroundColor: '#000000',
+    alignItems: 'center',
+    justifyContent: 'center',
   }, text: {
     color: '#fff',
     // changing positi

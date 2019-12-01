@@ -10,32 +10,34 @@ const style = {
   }
 }
 
-export default class Word extends React.Component {
+export default class Word extends React.PureComponent {
   constructor(){
     super();
 
     this.state = {
       positionTop: 0,
-      positionLeft: Math.floor(Math.random() * 325)
+      positionLeft: Math.floor(Math.random() * 325),
+      length: 0,
     }
   }
 
   componentDidMount(){
     // ideal number for android => 55-60
-    const repeatRate = Platform.OS == 'ios' ? 15 : 55
+    const repeatRate = Platform.OS == 'ios' ? 15 : 50
     this.interval = setInterval(this.slideWord, repeatRate)
   }
 
   componentWillUnmount(){
+    this.props.sendWordLoc(this.state)
     clearInterval(this.interval)
   }
 
   slideWord = () => {
-    const increaseRate = Platform.OS == 'ios' ? 0.52 : 0.8
+    const increaseRate = Platform.OS == 'ios' ? 0.52 : 1
     this.setState({
       positionTop: this.state.positionTop + increaseRate
     }, function(){
-      const limitNum = Platform.OS == 'ios' ? 40 : 40
+      const limitNum = Platform.OS == 'ios' ? 45 : 40
       const limit = Math.floor((Math.round(Dimensions.get('window').height) / 100) * limitNum )
       if(this.state.positionTop >= limit){
         this.props.handleEndGame()
@@ -60,6 +62,10 @@ export default class Word extends React.Component {
     }
 
     render(){
+      // sometimes gives bug check that!
+      if(this.state.length === 0){
+        this.setState({length: this.props.text.length})
+      }
       return(this.renderWord())
     }
 }
