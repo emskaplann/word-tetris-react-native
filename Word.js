@@ -22,6 +22,7 @@ export default class Word extends React.PureComponent {
   }
 
   componentDidMount(){
+    this.setState({length: this.props.text.length})
     // ideal number for android => 55-60
     const repeatRate = Platform.OS == 'ios' ? 15 : 50
     this.interval = setInterval(this.slideWord, repeatRate)
@@ -63,9 +64,7 @@ export default class Word extends React.PureComponent {
 
     render(){
       // sometimes gives bug check that!
-      if(this.state.length === 0){
-        this.setState({length: this.props.text.length})
-      }
+
       return(this.renderWord())
     }
 }

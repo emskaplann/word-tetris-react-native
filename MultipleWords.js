@@ -101,6 +101,9 @@ export default class MultipleWords extends React.Component {
 
   renderWords = () => {
     const transformedArray = this.state.activeWords.map((word) => <Word text={word} key={word} sendWordLoc={this.sendWordLoc} handleEndGame={this.beforeHandleGame}/>)
+    if(transformedArray.length === 0){
+      return;
+    }
     return transformedArray;
   }
 

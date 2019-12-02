@@ -87,7 +87,14 @@ export default class HighScoreScreen extends React.Component {
       alignItems: 'center',
       justifyContent: 'center',
     }, subContainer: {
-      flex:1,
+      flex: 0.5,
+      flexDirection:"row",
+      backgroundColor: '#000000',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 10
+    }, lgSubContainer: {
+      flex: 5,
       flexDirection:"row",
       backgroundColor: '#000000',
       alignItems: 'center',
@@ -95,21 +102,22 @@ export default class HighScoreScreen extends React.Component {
       marginBottom: 10
     }}
     return(<View style={style.container}>
-
             <HSModal userName={navigation.getParam('userName', 'noName')} time={navigation.getParam('time', 'noTime')} score={navigation.getParam('score', 'noScore')} />
-            <Text style={{
-                position: "absolute",
-                top: 0,
-                fontWeight: "bold",
-                fontSize: 50,
-                color: "#fff"
-              }}>{this.renderHSLabel()}</Text>
-              <View style={style.subContainer}></View>
-            <View style={style.subContainer}></View>
-            <View style={{height: "90%"}}>
+            <View style={style.subContainer}>
+              <Text style={{
+                  position: "absolute",
+                  top: 0,
+                  fontWeight: "bold",
+                  fontSize: 50,
+                  color: "#fff"
+                }}>{this.renderHSLabel()}</Text>
+            </View>
+            <View style={style.lgSubContainer}>
               <ScrollView style={{marginHorizontal: 20, top: 0}}>
                 {this.renderTimeScores()}
               </ScrollView>
+            </View>
+            <View style={style.subContainer}>
               <TouchableOpacity
                 style={{alignItems: 'center',
                 padding: 5,
@@ -121,8 +129,7 @@ export default class HighScoreScreen extends React.Component {
               >
               <Animatable.Text animation="pulse" duration={600} iterationCount="infinite" direction="alternate" style={{color: "#fff", fontSize: 25}}>{this.state.buttonTitle}</Animatable.Text>
             </TouchableOpacity>
-           </View>
-           <View style={style.subContainer}></View>
+            </View>
          </View>)
   }
 }
