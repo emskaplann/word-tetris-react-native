@@ -102,7 +102,7 @@ export default class HighScoreScreen extends React.Component {
       marginBottom: 10
     }}
     return(<View style={style.container}>
-            <HSModal userName={navigation.getParam('userName', 'noName')} time={navigation.getParam('time', 'noTime')} score={navigation.getParam('score', 'noScore')} />
+            <HSModal userName={navigation.getParam('userName', 'noName')} time={navigation.getParam('time', 'noTime')} score={navigation.getParam('score', 'noScore')} rankInTime={navigation.getParam('rankInTime', 'noTime')} rankInScore={navigation.getParam('rankInScore', 'noScore')} userId={navigation.getParam('userId', 'uId')}/>
             <View style={style.subContainer}>
               <Text style={{
                   position: "absolute",

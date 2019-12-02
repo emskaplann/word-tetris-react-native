@@ -17,7 +17,6 @@ export default class HomeScreen extends React.Component {
         alert: false,
         textValue: "",
         selectedDiff: 1,
-        deviceHeight: Math.round(Dimensions.get('window').height),
       }
     }
 
@@ -31,7 +30,7 @@ export default class HomeScreen extends React.Component {
       const {navigate} = this.props.navigation
 
       if(this.state.textValue !== ""){
-        navigate('Play', {userName: this.state.textValue, difficulty: this.state.selectedDiff, deviceHeight: this.state.deviceHeight})
+        navigate('Play', {userName: this.state.textValue, difficulty: this.state.selectedDiff})
         this.setState({alert: false})
         this.changeAlert(false)
       } else {

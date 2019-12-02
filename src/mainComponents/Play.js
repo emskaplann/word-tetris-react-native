@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Platform, Text, View} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MultipleWords from './MultipleWords.js';
-
+  const gamesTime = []
+  const gamesScore = []
   export const playScreenStyles = {
     text: {
       color: '#fff'
@@ -40,6 +41,7 @@ export default class PlayScreen extends React.Component {
   }
 
   componentDidMount(){
+    this.fetchGames()
     this.fetchWords()
     this.postFetchUser()
     this.setState({diff: this.props.navigation.getParam('difficulty', '1')})
@@ -104,22 +106,41 @@ export default class PlayScreen extends React.Component {
         })
       }
 
-  postFetchUser = () => {
-    fetch("https://calm-ocean-20734.herokuapp.com/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      }, body: JSON.stringify({
-          username: this.props.navigation.getParam('userName', 'uName')
-      })
-    })
+  fetchGames(){
+    fetch("https://calm-ocean-20734.herokuapp.com/games?time=longest")
     .then(r => r.json())
     .then(r => {
-      this.setState({
-        userId: r.id
-      })
+      gamesTime = r.map(game => game.time)
     })
+    fetch("https://calm-ocean-20734.herokuapp.com/games?score=highest")
+    .then(r => r.json())
+    .then(r => {
+      gamesScore = r.map(game => game.score)
+    })
+  }
+
+  postFetchUser = () => {
+    if(this.props.navigation.getParam('userName', 'uName') == 'uName'){
+      this.setState({
+        userId: this.props.navigation.getParam('userId', 'uId')
+      })
+    } else {
+      fetch("https://calm-ocean-20734.herokuapp.com/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }, body: JSON.stringify({
+            username: this.props.navigation.getParam('userName', 'uName')
+        })
+      })
+      .then(r => r.json())
+      .then(r => {
+        this.setState({
+          userId: r.id
+        })
+      })
+    }
   }
 
   postFetchGame = () => {
@@ -136,10 +157,17 @@ export default class PlayScreen extends React.Component {
     })
     .then(r => r.json())
     .then(r => {
+      gamesScore += r.score
+      gamesScore.sort((a, b) => a - b)
+      gamesTime += r.time
+      gamesTime.sort((a, b) => a - b)
       this.props.navigation.replace(({routeName: 'HighScores', params: {
         time: r.time,
+        rankInTime: 1 + gamesTime.indexOf(r.time)
         score: r.score,
-        userName: r.user.username
+        rankInScore: 1 + gamesScore.indexOf(r.score)
+        userName: r.user.username,
+        userId: r.user.id,
       }}));
     })
   }

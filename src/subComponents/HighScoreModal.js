@@ -29,8 +29,18 @@ export default class HSModal extends React.Component {
               </TouchableHighlight>
               <Text style={{color: "#fff", fontWeight: 'bold', fontSize: 50, position: 'absolute', top: 10, paddingLeft: 5}}>your stats</Text>
               <Text style={{color: "#fff", fontWeight: '700', fontSize: 40, paddingLeft: 10, paddingTop: 30}}>{this.props.userName}</Text>
-              <Text style={{color: "#fff", fontWeight: '700', fontSize: 30, paddingLeft: 15}}>time: {this.props.time}</Text>
-              <Text style={{color: "#fff", fontWeight: '700', fontSize: 30, paddingLeft: 15}}>score: {this.props.score}</Text>
+              <Text style={{color: "#fff", fontWeight: '700', fontSize: 30, paddingLeft: 15}}>rank in time: {this.props.rankInTime}</Text>
+              <Text style={{color: "#fff", fontWeight: '700', fontSize: 30, paddingLeft: 10}}>time: {this.props.time}</Text>
+              <Text style={{color: "#fff", fontWeight: '700', fontSize: 30, paddingLeft: 15}}>rank in score: {this.props.rankInScore}</Text>
+              <Text style={{color: "#fff", fontWeight: '700', fontSize: 30, paddingLeft: 10}}>score: {this.props.score}</Text>
+                <TouchableHighlight
+                    onPress={() => {
+                      this.props.navigation.replace(({routeName: 'Play', params: {
+                        userId: this.props.userId
+                      }}));
+                    }}>
+                    <Text style={{color: "#fff", fontWeight: 'bold', fontSize: 30, alignSelf: 'flex-end',}}>play again!</Text>
+               </TouchableHighlight>
           </View>
         </Modal>
       </View>

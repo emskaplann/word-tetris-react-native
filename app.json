@@ -25,6 +25,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Very Basic Word Game. See how fast you type!",
+    "githubUrl": "https://github.com/emskaplann/word-tetris-react-native"
   }
 }
