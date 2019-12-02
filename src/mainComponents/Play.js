@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet, Platform, Text, View} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MultipleWords from './MultipleWords.js';
-  const gamesTime = []
-  const gamesScore = []
   export const playScreenStyles = {
     text: {
       color: '#fff'
@@ -37,6 +35,8 @@ export default class PlayScreen extends React.Component {
       userScore: 0,
       userId: 0,
       diff: 1,
+      gamesTime: [],
+      gamesScore: [],
     }
   }
 
@@ -110,12 +110,12 @@ export default class PlayScreen extends React.Component {
     fetch("https://calm-ocean-20734.herokuapp.com/games?time=longest")
     .then(r => r.json())
     .then(r => {
-      gamesTime = r.map(game => game.time)
+      this.setState({gamesTime: r.map(game => game.time)})
     })
     fetch("https://calm-ocean-20734.herokuapp.com/games?score=highest")
     .then(r => r.json())
     .then(r => {
-      gamesScore = r.map(game => game.score)
+      this.setState({gamesScore: r.map(game => game.score)})
     })
   }
 
@@ -157,15 +157,16 @@ export default class PlayScreen extends React.Component {
     })
     .then(r => r.json())
     .then(r => {
-      gamesScore += r.score
-      gamesScore.sort((a, b) => a - b)
-      gamesTime += r.time
-      gamesTime.sort((a, b) => a - b)
+      this.setState({gamesScore: [...this.state.gamesScore, r.score]})
+      let scores = this.state.gamesScore.sort((a, b) => b - a)
+      this.setState({gamesTime: [...this.state.gamesTime, r.time]})
+      let times = this.state.gamesTime.sort((a, b) => b - a)
+
       this.props.navigation.replace(({routeName: 'HighScores', params: {
         time: r.time,
-        rankInTime: 1 + gamesTime.indexOf(r.time)
+        rankInTime: 1 + times.indexOf(r.time),
         score: r.score,
-        rankInScore: 1 + gamesScore.indexOf(r.score)
+        rankInScore: 1 + scores.indexOf(r.score),
         userName: r.user.username,
         userId: r.user.id,
       }}));

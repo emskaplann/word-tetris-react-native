@@ -36,7 +36,8 @@ export default class HSModal extends React.Component {
                 <TouchableHighlight
                     onPress={() => {
                       this.props.navigation.replace(({routeName: 'Play', params: {
-                        userId: this.props.userId
+                        userId: this.props.userId,
+                        userName: this.props.userName
                       }}));
                     }}>
                     <Text style={{color: "#fff", fontWeight: 'bold', fontSize: 30, alignSelf: 'flex-end',}}>play again!</Text>
