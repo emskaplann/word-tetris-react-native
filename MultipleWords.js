@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Platform, TextInput, TouchableHighlight } from 'react-native';
 import Word from './Word.js'
 import WordInput from './WordInput.js'
+import GainsText from './GainsText.js'
 import * as Animatable from 'react-native-animatable';
 
 
@@ -90,13 +91,9 @@ export default class MultipleWords extends React.Component {
   }
 
   renderGains = () => {
-    if(this.state.wordLoc.length !== 0)
-    return(<Text style={{color: '#000000',
-    fontWeight: 'bold',
-    fontSize: 20,
-    position: 'absolute',
-    left: this.state.wordLoc.positionLeft,
-    top: this.state.wordLoc.positionTop}}>+{this.state.wordLoc.length}</Text>)
+    if(this.state.wordLoc.length !== 0){
+      return(<GainsText key={this.state.wordLoc.positionTop} wordObj={this.state.wordLoc}/>)
+    }
   }
 
   renderWords = () => {

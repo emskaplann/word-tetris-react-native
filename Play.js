@@ -161,7 +161,6 @@ export default class PlayScreen extends React.Component {
   }
 
   render(){
-    this.props.navigation.replace(({routeName: 'HighScores', params: {}}))
       return (
         <View style={playScreenStyles.container}>
             { this.timer() }
