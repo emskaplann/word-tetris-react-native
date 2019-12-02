@@ -1,9 +1,9 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Platform, TextInput, TouchableHighlight } from 'react-native';
-import Word from './Word.js'
-import WordInput from './WordInput.js'
-import GainsText from './GainsText.js'
+import Word from '../subComponents/Word.js'
+import WordInput from '../subComponents/WordInput.js'
+import GainsText from '../subComponents/GainsText.js'
 import * as Animatable from 'react-native-animatable';
 
 

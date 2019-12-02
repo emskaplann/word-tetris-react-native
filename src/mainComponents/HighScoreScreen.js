@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, ScrollView, Button} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import HSModal from './HighScoreModal.js';
+import HSModal from '../subComponents/HighScoreModal.js';
 
 
 // everything is working fine just need to style everything

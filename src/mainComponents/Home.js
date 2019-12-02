@@ -1,9 +1,9 @@
 import React from 'react';
 import { Platform, Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import TextForUsername from './TextForUsername.js';
+import TextForUsername from '../subComponents/TextForUsername.js';
 import { ButtonGroup } from 'react-native-elements';
-import { styles } from './CustomStyles.js';
+import { styles } from '../subComponents/CustomStyles.js';
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {

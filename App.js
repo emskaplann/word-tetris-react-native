@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, Platform, View, Button } from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import HomeScreen from './Home.js'
-import PlayScreen from './Play.js'
-import HighScoreScreen from './HighScoreScreen.js'
+import HomeScreen from './src/mainComponents/Home.js'
+import PlayScreen from './src/mainComponents/Play.js'
+import HighScoreScreen from './src/mainComponents/HighScoreScreen.js'
 // styling
 export const styles = StyleSheet.create({
   container: {

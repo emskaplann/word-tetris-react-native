@@ -24,7 +24,7 @@ export default class Word extends React.PureComponent {
   componentDidMount(){
     this.setState({length: this.props.text.length})
     // ideal number for android => 55-60
-    const repeatRate = Platform.OS == 'ios' ? 15 : 50
+    const repeatRate = Platform.OS == 'ios' ? 15 : 57
     this.interval = setInterval(this.slideWord, repeatRate)
   }
 
@@ -34,7 +34,7 @@ export default class Word extends React.PureComponent {
   }
 
   slideWord = () => {
-    const increaseRate = Platform.OS == 'ios' ? 0.52 : 1
+    const increaseRate = Platform.OS == 'ios' ? 0.52 : 1.7
     this.setState({
       positionTop: this.state.positionTop + increaseRate
     }, function(){
